@@ -15,7 +15,7 @@ provider "azurerm" {
 
 # Create Resource Group
 resource "azurerm_resource_group" "don_rg" {
-    location = "eastus2"
+    location = "eastus"
     name = "don-rg"
     
     tags = {
