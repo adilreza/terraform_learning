@@ -51,13 +51,24 @@ resource "azurerm_network_security_group" "example" {
   resource_group_name = data.azurerm_resource_group.rg-pre-existing.name
 
   security_rule {
-    name                       = "test123"
+    name                       = "HTTP"
     priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "80"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+  security_rule {
+    name                       = "SSH"
+    priority                   = 150
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
@@ -69,7 +80,7 @@ resource "azurerm_linux_virtual_machine" "don-vm" {
   location = data.azurerm_resource_group.rg-pre-existing.location
   size = "Standard_B1s" //1,1
   admin_username = "ubuntu"
-  admin_password = "*****"
+  admin_password = "OrreBapreKhubVab123#"
   disable_password_authentication = false
   network_interface_ids = [
     azurerm_network_interface.don-ni.id
